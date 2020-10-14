@@ -1,8 +1,7 @@
 import { Gender } from '../enums/gender';
-import { ClothingType } from './clothing-type';
 
 export interface OrderItem {
-  type: ClothingType;
+  type: string;
   size: string;
   gender: Gender;
   quantity: number;

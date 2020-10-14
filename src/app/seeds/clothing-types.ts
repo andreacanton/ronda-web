@@ -1,4 +1,7 @@
-import { ClothingType } from '../models/clothing-type';
+interface ClothingType {
+  name: string;
+  sizes?: string[];
+}
 
 export const clothingTypes: ClothingType[] = [
   {

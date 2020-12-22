@@ -17,6 +17,7 @@ import {
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 const MaterialModules = [
   MatCommonModule,
@@ -28,7 +29,7 @@ const MaterialModules = [
   MatInputModule,
 ];
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent, LoginComponent, CreateUserComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

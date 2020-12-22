@@ -1,0 +1,43 @@
+<h1>Crea utente</h1>
+<form [formGroup]="createForm">
+  <mat-form-field>
+    <mat-label>Nome</mat-label>
+    <input matInput formControlName="firstname" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Cognome</mat-label>
+    <input matInput formControlName="lastname" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Numero Socio</mat-label>
+    <input matInput formControlName="memberNumber" />
+    <mat-error *ngIf="createForm.controls.memberNumber.hasError('required')">
+      Il numero socio è obbligatorio
+    </mat-error>
+    <mat-error *ngIf="createForm.controls.memberNumber.hasError('pattern')">
+      Il formato non è corretto, sono accettati solo numeri
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>E-mail</mat-label>
+    <input matInput type="email" formControlName="email" />
+    <mat-error *ngIf="createForm.controls.email.hasError('required')">
+      L'e-mail è obbligatoria
+    </mat-error>
+    <mat-error *ngIf="createForm.controls.email.hasError('email')">
+      Formato e-mail non corretto
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput formControlName="password" />
+    <mat-error *ngIf="createForm.controls.email.hasError('required')">
+      L'e-mail è obbligatoria
+    </mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="primary">Crea</button>
+
+  <button mat-raised-button (click)="generatePassword()" href="">
+    Genera una password causale
+  </button>
+</form>

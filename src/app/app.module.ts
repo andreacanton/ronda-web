@@ -18,6 +18,8 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { ENVIRONMENT } from 'src/environments/environment.token';
+import { environment } from 'src/environments/environment';
 
 const MaterialModules = [
   MatCommonModule,
@@ -42,6 +44,10 @@ const MaterialModules = [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'outline' },
+    },
+    {
+      provide: ENVIRONMENT,
+      useValue: environment,
     },
   ],
   bootstrap: [AppComponent],

@@ -16,6 +16,7 @@ import {
 } from '@angular/material/form-field';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 const MaterialModules = [
   MatCommonModule,
@@ -33,6 +34,7 @@ const MaterialModules = [
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     ...MaterialModules,
   ],
   providers: [

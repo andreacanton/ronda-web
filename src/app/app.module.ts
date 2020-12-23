@@ -10,16 +10,21 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {
   MatFormFieldModule,
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
 } from '@angular/material/form-field';
-import { LoginComponent } from './login/login.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './user/components/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CreateUserComponent } from './create-user/create-user.component';
+import { CreateUserComponent } from './user/components/create-user/create-user.component';
 import { ENVIRONMENT } from 'src/environments/environment.token';
 import { environment } from 'src/environments/environment';
+import { SharedModule } from '@shared/shared.module';
+import { UsersModule } from './user/users.module';
 
 const MaterialModules = [
   MatCommonModule,
@@ -27,18 +32,18 @@ const MaterialModules = [
   MatButtonModule,
   MatIconModule,
   MatSidenavModule,
-  MatFormFieldModule,
-  MatInputModule,
 ];
 @NgModule({
-  declarations: [AppComponent, LoginComponent, CreateUserComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SharedModule,
     ...MaterialModules,
+    UsersModule,
   ],
   providers: [
     {

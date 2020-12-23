@@ -1,0 +1,65 @@
+<form [formGroup]="userForm" (submit)="onSubmit()">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title><h1>Crea utente</h1></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="firstname" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Cognome</mat-label>
+        <input matInput formControlName="lastname" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Numero Socio</mat-label>
+        <input matInput formControlName="memberNumber" />
+        <mat-error *ngIf="userForm.controls.memberNumber.hasError('required')">
+          Il numero socio è obbligatorio
+        </mat-error>
+        <mat-error *ngIf="userForm.controls.memberNumber.hasError('pattern')">
+          Il formato non è corretto, sono accettati solo numeri
+        </mat-error>
+        <mat-error *ngIf="userForm.controls.memberNumber.hasError('isTaken')">
+          Socio già registrato
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>E-mail</mat-label>
+        <input matInput type="email" formControlName="email" />
+        <mat-error *ngIf="userForm.controls.email.hasError('required')">
+          L'e-mail è obbligatoria
+        </mat-error>
+        <mat-error *ngIf="userForm.controls.email.hasError('email')">
+          Formato e-mail non corretto
+        </mat-error>
+        <mat-error *ngIf="userForm.controls.email.hasError('isTaken')">
+          E-mail già registrata
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" />
+        <mat-error *ngIf="userForm.controls.email.hasError('required')">
+          L'e-mail è obbligatoria
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Ruolo</mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="member">Socio normale</mat-option>
+          <mat-option value="admin">Amministratore</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">
+        Crea utente
+      </button>
+      <a mat-raised-button (click)="generatePassword()">
+        Genera una password causale
+      </a>
+    </mat-card-actions>
+  </mat-card>
+</form>

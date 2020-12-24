@@ -1,0 +1,7 @@
+@import "../functions";
+
+@include breakpoint(laptop) {
+  .menu-toggle {
+    display: none;
+  }
+}

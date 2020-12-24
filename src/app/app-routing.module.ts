@@ -5,8 +5,17 @@ import { LoginComponent } from './user/components/login/login.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'users/create',
     component: CreateUserComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: '',
+    redirectTo: 'users/create',
+    pathMatch: 'full',
   },
 ];
 

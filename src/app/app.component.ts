@@ -10,7 +10,8 @@ export class AppComponent implements OnInit {
   isSidebarOpen: boolean;
 
   ngOnInit(): void {
-    this.isSidebarOpen = false;
+    const mediaQueryList = window.matchMedia('(min-width: 64em)');
+    this.isSidebarOpen = mediaQueryList.matches;
   }
 
   public toggleSidebar(): void {

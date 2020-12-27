@@ -1,7 +1,7 @@
-import { Gender } from '../enums/gender';
-import { OrderStatus } from '../enums/order-status';
-import { Tour } from '../enums/tour';
-import { Order } from '../models/order';
+import { Gender } from '../data/enums/gender';
+import { OrderStatus } from '../data/enums/order-status';
+import { Tour } from '../data/enums/tour';
+import { Order } from '../data/schema/order';
 import { recipients } from './recipients';
 
 export const orders: Order[] = [

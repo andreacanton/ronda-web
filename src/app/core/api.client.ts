@@ -8,8 +8,8 @@ import {
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { EnvironmentInterface } from 'src/environments/environment.interface';
-import { ENVIRONMENT } from 'src/environments/environment.token';
+import { EnvironmentInterface } from '@env/environment.interface';
+import { ENVIRONMENT } from '@env/environment.token';
 
 @Injectable({
   providedIn: 'root',

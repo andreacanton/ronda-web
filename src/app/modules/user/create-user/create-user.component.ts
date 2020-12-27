@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { delay, map } from 'rxjs/operators';
-import { UsersService } from '../../providers/users.service';
+import { UsersService } from '../../../data/services/users.service';
 
 @Component({
   selector: 'app-create-user',

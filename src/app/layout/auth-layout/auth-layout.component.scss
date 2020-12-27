@@ -1,9 +1,9 @@
 :host {
   display: flex;
-  padding: 2em 0;
   align-items: center;
   justify-content: center;
 }
-form {
-  width: 250px;
+
+.container {
+  max-width: 250px;
 }

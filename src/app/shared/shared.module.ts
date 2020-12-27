@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -25,11 +26,7 @@ const materialModules = [
   MatSnackBarModule,
   MatRippleModule,
 ];
-const commonModules = [
-  BrowserAnimationsModule,
-  HttpClientModule,
-  ReactiveFormsModule,
-];
+const commonModules = [ReactiveFormsModule];
 @NgModule({
   declarations: [],
   imports: [...commonModules, ...materialModules],

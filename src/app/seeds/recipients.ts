@@ -1,4 +1,4 @@
-import { Recipient } from '../models/recipient';
+import { Recipient } from '../data/schema/recipient';
 
 export const recipients: Recipient[] = [
   {

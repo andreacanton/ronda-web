@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ApiClient } from '@shared/services/api.client';
+import { ApiClient } from '@core/api.client';
 import { EMPTY, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { User } from '../models/user';
+import { User } from '../schema/user';
 
 @Injectable({
   providedIn: 'root',

@@ -12,6 +12,18 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout.component'
 import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 import { AuthModule } from './modules/auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { TokenService } from '@core/services/token.service';
+
+export function jwtOptionsFactory(tokenService: TokenService) {
+  return {
+    tokenGetter: () => {
+      return tokenService.getToken();
+    },
+    allowedDomains: ['localhost:3000'], //TODO: ADD PROD DOMAIN!
+  };
+}
 
 @NgModule({
   declarations: [
@@ -26,6 +38,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SharedModule,
     AuthModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    JwtModule.forRoot({
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: jwtOptionsFactory,
+        deps: [TokenService],
+      },
+    }),
   ],
   providers: [
     {

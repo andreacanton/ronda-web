@@ -1,10 +1,4 @@
-import {
-  HttpClient,
-  HttpEvent,
-  HttpHeaders,
-  HttpParams,
-  HttpResponse,
-} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -55,19 +49,21 @@ export class ApiClient {
         | {
             [header: string]: string | string[];
           };
-      observe: 'response';
       params?:
         | HttpParams
         | {
             [param: string]: string | string[];
           };
       reportProgress?: boolean;
-      responseType?: 'json';
       withCredentials?: boolean;
     }
   ): Observable<T> {
     return this.httpClient
-      .post<T>(`${this.appConfig.apiUrl}/${path}`, body, options)
+      .post<T>(`${this.appConfig.apiUrl}/${path}`, body, {
+        observe: 'response',
+        responseType: 'json',
+        ...options,
+      })
       .pipe(map((response) => response.body));
   }
 

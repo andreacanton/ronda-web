@@ -1,15 +1,24 @@
 <h1>Accesso volontari</h1>
-<form [formGroup]="loginForm">
+<form [formGroup]="loginForm" (submit)="doLogin()">
+  <div class="login-error" *ngIf="errors">
+    {{ errors | json }}
+  </div>
   <mat-form-field>
     <mat-label>Email o numero tessera</mat-label>
-    <input matInput type="text" formControlName="username" />
+    <input matInput type="text" formControlName="identity" />
+    <mat-error *ngIf="controls.identity.hasError('required')">
+      Questo campo è obbligatorio
+    </mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Password</mat-label>
     <input matInput type="password" formControlName="password" />
-    <mat-hint>
-      <a href="/recover-password">Password dimenticata?</a>
-    </mat-hint>
+    <mat-error *ngIf="controls.password.hasError('required')">
+      Questo campo è obbligatorio
+    </mat-error>
   </mat-form-field>
   <button mat-raised-button color="primary">Accedi</button>
 </form>
+<p class="utils-links">
+  <a href="/recover-password">Hai dimenticato la password?</a>
+</p>

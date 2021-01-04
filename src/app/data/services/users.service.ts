@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ApiClient } from '@core/api.client';
+import { ApiClient } from '@core/services/api.client';
 import { EMPTY, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { User } from '../schema/user';

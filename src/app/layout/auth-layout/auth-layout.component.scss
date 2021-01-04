@@ -2,6 +2,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+}
+
+header {
+  padding: 2em 0;
+  img {
+    width: 250px;
+    height: auto;
+  }
 }
 
 .container {

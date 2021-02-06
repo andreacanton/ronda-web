@@ -18,6 +18,8 @@ const Login = () => {
     const history = useHistory();
     const [email, setEmail]  = useState('');
     const [pwd, setPwd]  = useState('');
+    const [message, setMessage]  = useState('');
+    const [error, setErrors]  = useState(false);
     //const history = useHistory();
     //const [jwtcode, setjwt] = useState('');
 
@@ -32,12 +34,18 @@ const Login = () => {
             const decode = decodeToken(jwtCode);
             const role = decode.role;
             sessionStorage.setItem('tokeJwt',jwtCode);
+            localStorage.setItem('tokeJwt',jwtCode);
             //return (<Redirect to={`/Home/${role}`}/>);
             history.push(`/Home/${role}`);
         },(errors) =>{
-            if(errors.response.status === 401)
+            if(errors.response.status === 401){
                 console.log("errore dati login" + errors);
-                return <p>Error di Login</p>;
+                setErrors(true);
+                setMessage("Email e/o Password errate. Perfavore reinseriscile correttamente");
+            }else{
+                setErrors(true);
+                setMessage("Servizio momentaneamente non disponibile! Riprova più tardi");
+            }
         } );
     } 
 
@@ -48,6 +56,7 @@ const Login = () => {
 
     return (
         <>
+            { error ? <div className="error__banner">{message}</div> : <div></div>}
             <img className="wave" src={wave} alt="onda"/>
             <div className="container">
                 <div className="img">

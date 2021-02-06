@@ -92,7 +92,7 @@ export default function Appbar(props) {
         history.push(`/`);
 
     }
-    const menuAdmin = ['Lista Utenti', 'Crea Utente',];
+    const menuAdmin = ['Home', 'Crea Utente',];
     const menuMember = ['Impostazioni Account'];
     var objToRender = [];
     const classes = useStyles();
@@ -117,10 +117,10 @@ export default function Appbar(props) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-    if(props.role ==='admin'){
+    if(props.role === 'admin'){
         objToRender = menuAdmin;
     }
-    else if(props.role ==='member'){
+    else if(props.role === 'member'){
         objToRender = menuMember;
     }
 
@@ -166,14 +166,14 @@ export default function Appbar(props) {
         <Divider />
         <List>
             <ListItem  selected button onClick={(e)=>{ e.preventDefault(); history.push(`/Home/${props.role}`);}}>
-                <ListItemIcon><HomeOutlinedIcon/></ListItemIcon>
-                <ListItemText>Home</ListItemText>
+                <ListItemIcon><ListAltIcon/></ListItemIcon>
+                <ListItemText>Lista Utenti</ListItemText>
             </ListItem>
         </List>
         <List>
           { objToRender.map((text, index) => (
             <ListItem button onClick ={(e)=>changePage(e,text)} key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <ListAltIcon /> : <AddCircleOutlineIcon />}</ListItemIcon>
+              <ListItemIcon>{index % 2 === 0 ? <HomeOutlinedIcon /> : <AddCircleOutlineIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}

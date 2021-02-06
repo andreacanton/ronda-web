@@ -46,13 +46,13 @@ const ForgetPassword = () => {
                 console.log(response);
             }
         },(errors)=>{
+            setSuccess(false);
             console.log("Error");
         });
     }
 
     const ConfirmChangePassword = (e) =>{
         e.preventDefault(e);
-        setSuccess(false);
         alert("Password Confermata");
     }
 
@@ -81,7 +81,7 @@ const ForgetPassword = () => {
                                 <label className="label__form">Inserisci il codice arrivato tramite email</label>
                                 <input type="text"  className="input__form" value={codice} placeholder="codice" onChange={(e)=>setCodice(e.target.value)}/>
                             </> : 
-                             <label></label>
+                             <label></label> //Setta la label dopo
                         }
                         {success ? 
                                 <input type="submit" className="btn" onClick={(e)=>ConfirmChangePassword(e)} value="Conferma"/>

@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import Listuser from './Listuser';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -23,6 +24,8 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
+import { isExpired, decodeToken } from "react-jwt";
+
 
 const drawerWidth = 240;
 
@@ -64,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
   },
   content: {
     flexGrow: 1,
@@ -84,14 +87,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Appbar(props) {
+export default function Appbar() {
     const history = useHistory();
     const logoutF = (e) =>{
         e.preventDefault();
         sessionStorage.removeItem('tokeJwt');
         history.push(`/`);
-
     }
+
+    const jwtCode = sessionStorage.getItem('tokeJwt');
+    const decode = decodeToken(jwtCode);
+    const role = decode.role;
     const menuAdmin = ['Home', 'Crea Utente',];
     const menuMember = ['Impostazioni Account'];
     var objToRender = [];
@@ -105,22 +111,25 @@ export default function Appbar(props) {
 
     const changePage = (e,text) =>{
       e.preventDefault();
+      if(text === 'Home'){
+        history.push(`/Home/${role}`);
+      }
       if(text === 'Lista Utenti'){
-        history.push(`/userList/${props.role}`);
+        history.push(`/userList/${role}`);
         
       }
       if(text === 'Crea Utente'){
-        history.push(`/create-new-user/${props.role}`);
+        history.push(`/create-new-user/${role}`);
       }
     }
 
     const handleDrawerClose = () => {
         setOpen(false);
     };
-    if(props.role === 'admin'){
+    if(role === 'admin'){
         objToRender = menuAdmin;
     }
-    else if(props.role === 'member'){
+    else if(role === 'member'){
         objToRender = menuMember;
     }
 
@@ -165,7 +174,7 @@ export default function Appbar(props) {
         </div>
         <Divider />
         <List>
-            <ListItem  selected button onClick={(e)=>{ e.preventDefault(); history.push(`/Home/${props.role}`);}}>
+            <ListItem  selected button onClick={(e)=>{ e.preventDefault(); history.push(`/Home/${role}`);}}>
                 <ListItemIcon><ListAltIcon/></ListItemIcon>
                 <ListItemText>Lista Utenti</ListItemText>
             </ListItem>
@@ -186,13 +195,17 @@ export default function Appbar(props) {
             </ListItem>
         </List>
       </Drawer> 
-      {/* <main
+      <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
       >
-        <div className={classes.drawerHeader} />
-      </main> */}
+        
+        <div className={classes.drawerHeader}>
+          
+        </div>
+        <Listuser/>
+      </main>
     </div>
   );
 }

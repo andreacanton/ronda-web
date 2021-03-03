@@ -23,6 +23,7 @@ import { useHistory } from "react-router-dom";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import { isExpired, decodeToken } from "react-jwt";
 
@@ -98,7 +99,7 @@ export default function Appbar() {
     const jwtCode = sessionStorage.getItem('tokeJwt');
     const decode = decodeToken(jwtCode);
     const role = decode.role;
-    const menuAdmin = ['Home', 'Crea Utente',];
+    const menuAdmin = ['Home'];
     const menuMember = ['Impostazioni Account'];
     var objToRender = [];
     const classes = useStyles();
@@ -114,12 +115,11 @@ export default function Appbar() {
       if(text === 'Home'){
         history.push(`/Home/${role}`);
       }
-      if(text === 'Lista Utenti'){
-        history.push(`/userList/${role}`);
-        
-      }
       if(text === 'Crea Utente'){
         history.push(`/create-new-user/${role}`);
+      }
+      if(text === 'impostazioni'){
+        history.push(`/impostazioni/${role}`);
       }
     }
 
@@ -132,6 +132,7 @@ export default function Appbar() {
     else if(role === 'member'){
         objToRender = menuMember;
     }
+
 
   return (
     <div className={classes.root}>
@@ -187,6 +188,12 @@ export default function Appbar() {
             </ListItem>
           ))}
         </List>
+        <List>
+            <ListItem button onClick={(e)=>changePage(e,"impostazioni")}>
+                <ListItemIcon><SettingsOutlinedIcon/></ListItemIcon>
+                <ListItemText>Impostazioni Utente</ListItemText>
+            </ListItem>
+        </List>
         <Divider/>
         <List>
             <ListItem button onClick={(e)=>logoutF(e)}>
@@ -204,7 +211,6 @@ export default function Appbar() {
         <div className={classes.drawerHeader}>
           
         </div>
-        <Listuser/>
       </main>
     </div>
   );

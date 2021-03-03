@@ -23,6 +23,8 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
+import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
+
 
 const drawerWidth = 240;
 
@@ -92,7 +94,7 @@ export default function Appbar(props) {
         history.push(`/`);
 
     }
-    const menuAdmin = ['Lista Utenti', 'Crea Utente',];
+    const menuAdmin = ['Lista Utenti'];
     const menuMember = ['Impostazioni Account'];
     var objToRender = [];
     const classes = useStyles();
@@ -107,10 +109,9 @@ export default function Appbar(props) {
       e.preventDefault();
       if(text === 'Lista Utenti'){
         history.push(`/userList/${props.role}`);
-        
       }
-      if(text === 'Crea Utente'){
-        history.push(`/create-new-user/${props.role}`);
+      if(text === 'impostazioni'){
+        history.push(`/impostazioni/${props.role}`);
       }
     }
 
@@ -177,6 +178,12 @@ export default function Appbar(props) {
               <ListItemText primary={text} />
             </ListItem>
           ))}
+        </List>
+        <List>
+            <ListItem button onClick={(e)=>changePage(e,"impostazioni")}>
+                <ListItemIcon><SettingsOutlinedIcon/></ListItemIcon>
+                <ListItemText>Impostazioni Utente</ListItemText>
+            </ListItem>
         </List>
         <Divider/>
         <List>

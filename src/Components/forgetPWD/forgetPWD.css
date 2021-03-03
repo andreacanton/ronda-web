@@ -12,6 +12,15 @@
     justify-content: center;
 }
 
+.container__FormPWD{
+    display:flex;
+    /* border:1px solid red; */
+    align-items: center;
+    height:80vh;
+    margin-bottom:5px;
+    justify-content: center;
+}
+
 .label__form{
     font-size: 16px;
     font-weight:800;
@@ -60,4 +69,18 @@
 }
 .btn:hover{
 	background-position: right;
+}
+
+
+.error__banner{
+	width:100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #d32f2f;
+	color:#fff;
+	opacity: 0.8;
+	z-index:1;
+	font-weight: 800;
+	font-size:23px;
 }

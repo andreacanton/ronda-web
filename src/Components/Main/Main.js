@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from "react-router-dom";
-import AppBar from './Appbar';
+import AppBar from '../Appbar';
 const Main = (props) => {
     let {role} = props.match.params;
     return (

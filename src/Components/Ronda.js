@@ -15,7 +15,7 @@ const Ronda = () => {
                 <Route exact path="/Home/:role" component={Main} />
                 <Route exact path="/" type="guest" component={Login}/>
                 <Route exact path="/respassword" component={ForgetPassword}/>
-                <Route exact path="/reset-password" component={resetPassword}/>
+                <Route exact path="/reset-password" component={ForgetPassword}/>
                 <Route exact path="/userList/:role/" component={Userlist}/>
                 <Route exact path="/create-new-user/:role" component={Createuser}/>
                 <Route exact path="/impostazioni/:role" component={Settings}/>

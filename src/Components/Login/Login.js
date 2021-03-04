@@ -87,12 +87,7 @@ const Login = () => {
         } );
     } 
 
-    const forgetPWD = (e) =>{
-        e.preventDefault();
-        history.push(`/respassword`);
-    }
-
-      const classes = useStyles();
+    const classes = useStyles();
     return (
        
         <>
@@ -148,7 +143,7 @@ const Login = () => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="/respassword" variant="body2">
+              <Link href="/reset-password" variant="body2">
                 Forgot password?
               </Link>
             </Grid>

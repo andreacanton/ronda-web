@@ -7,21 +7,32 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SweetAlert from 'react-bootstrap-sweetalert';
+import Container from '@material-ui/core/Container';
+import {TextField, Button, Grid,CssBaseline,Avatar, } from '@material-ui/core';
 import './forgetPWD.css';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import { isExpired } from "react-jwt";
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
     },
-    menuButton: {
-      marginRight: theme.spacing(2),
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
     },
-    title: {
-      flexGrow: 1,
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
     },
   }));
 
@@ -104,18 +115,26 @@ const ForgetPassword = () => {
                     </AppBar>
                 </div>
                 { error ? <div className="error__banner">{message}</div> : <div></div>}
-                <div className="container__forget">
-                    <div className="container__Form">
-                        <form>
-                            <label className="label__form">inserisci l'email associata al tuo account Ronda</label>
-                            <input className="input__form" value={emailpwd} style = {{ backgroundColor: status ? 'lightgray':'trasparent' }} onChange={(e)=>setEmailpwd(e.target.value)}type="email" placeholder="email" readOnly={status}/> 
-                            <input type="submit" className="btn" onClick={(e)=>resetPassword(e)} value="Conferma"/>                                
-                        </form>
-                        { success ?
-                            <SweetAlert success title={"Operazione effettuata con successo"} confirmBtnText={"Torna alla Home"} onConfirm={()=> BacktoHome()}></SweetAlert> : <p></p> 
-                        } 
-                    </div>
-                </div>
+                <Container component="main" maxWidth="xs">
+                    <CssBaseline />
+                        <div className={classes.paper}>
+                            <Avatar className={classes.avatar}>
+                                <LockOutlinedIcon />
+                            </Avatar>
+                            <Typography component="h1" variant="h5">
+                                Recupera Password
+                            </Typography>
+                            <form className={classes.form} noValidate onSubmit={(e)=>resetPassword(e)}>
+                                <TextField variant="outlined" margin="normal" required fullWidth type="email" id="email" label="Email Address" name="email" autoComplete="email" value={emailpwd}  onChange={(e)=> setEmailpwd(e.target.value)} autoFocus/>
+                                <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+                                    Invia Email
+                                </Button>
+                            </form>
+                            { success ?
+                                <SweetAlert success title={"Operazione effettuata con successo"} confirmBtnText={"Torna alla Home"} onConfirm={()=> BacktoHome()}></SweetAlert> : <p></p> 
+                            } 
+                        </div>
+                </Container>
             </>
         )
     }else{
@@ -124,8 +143,8 @@ const ForgetPassword = () => {
         let token = urlParams.get('token')
         if(isExpired(token)){
             <SweetAlert error title={"Questo link è scaduto effettua nuovamente la richiesta per una nuova password"} confirmBtnText={"Torna alla Home"} onConfirm={()=> BacktoHome()}></SweetAlert>;
-        }else{
-            return(
+        }
+            return (
                 <>
                     <div className={classes.root}>
                         <AppBar position="static">
@@ -139,25 +158,31 @@ const ForgetPassword = () => {
                             </Toolbar>
                         </AppBar>
                     </div>
-                    <div className="container__forget">
-                    <div className="container__FormPWD">
-                        <form>
-                            <label className="label__form">inserisci Password</label>
-                            <input className="input__form" value={pass} onChange={(e)=>setPass(e.target.value)} type="password" placeholder="Password"/> 
-                            <label className="label__form">Ripeti Password</label>
-                            <input className="input__form" value={confirmPass} onChange={(e)=>setConfirmPass(e.target.value)} type="password" placeholder="Ripeti Password"/> 
-                            <p style={{fontWeight:'800', color:'red'}}>{errPass}</p>
-                            <p style={{fontWeight:'800', color:'red'}}>{genericError}</p>
-                            <input type="submit" className="btn" onClick={(e)=>ConfirmNewPassword(e,token)} value="Conferma"/>                                
-                        </form>
-                        { success ?
-                            <SweetAlert success title={"Operazione effettuata con successo"} confirmBtnText={"Torna alla Home"} onConfirm={()=> BacktoHome()}></SweetAlert> : <p></p> 
-                        } 
-                    </div>
-                </div>
+                    <Container component="main" maxWidth="xs">
+                    <CssBaseline />
+                        <div className={classes.paper}>
+                            <Avatar className={classes.avatar}>
+                                <LockOutlinedIcon />
+                            </Avatar>
+                            <Typography component="h1" variant="h5">
+                                Recupera Password
+                            </Typography>
+                            <form className={classes.form} noValidate>
+                                <TextField variant="outlined" margin="normal" required fullWidth type="password" id="password" label="Inserisci Password" name="password" value={pass} onChange={(e)=>setPass(e.target.value)} autoFocus/>
+                                <TextField variant="outlined" margin="normal" required fullWidth type="password" id="password-confirm" label="Ripeti Password" name="password-confirm" value={confirmPass} onChange={(e)=>setConfirmPass(e.target.value)} autoFocus/>
+                                <Typography variant="h5" style={{color:'red'}}>{errPass}</Typography>
+                                <Typography variant="h5" style={{color:'red'}}>{genericError}</Typography>
+                                <Button type="submit" fullWidth variant="contained" onClick={(e)=>ConfirmNewPassword(e,token)} color="primary" className={classes.submit}>
+                                    Conferma
+                                </Button>
+                            </form>
+                            { success ?
+                                <SweetAlert success title={"Operazione effettuata con successo"} confirmBtnText={"Torna alla Home"} onConfirm={()=> BacktoHome()}></SweetAlert> : <p></p> 
+                            } 
+                        </div>
+                    </Container>
                 </>
             );
-        }
     }
 }
 

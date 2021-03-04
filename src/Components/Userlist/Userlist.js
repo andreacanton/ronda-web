@@ -126,8 +126,23 @@ const Userlist = () => {
 
     const saveNewUser = (e) =>{
         e.preventDefault();
-        instance.post()
-        console.log(numeroMembro+" >> "+email+" >> "+name+" >> "+cognome+" >> "+ruolo);
+        instance.post('/users/?resetUrl=http%3A%2F%2Flocalhost%3A3001%2Freset-password',{
+            headers:{
+                'Authorization': `Bearer ${jwtCode}`
+            },
+            firstname:name,
+            lastname:cognome,
+            email:email,
+            password:pwd,
+            memberNumber:numeroMembro,
+            role:ruolo
+        }).then((res)=>{
+            console.log(res);
+        })
+        .catch((err)=>{
+
+        });
+        //console.log(numeroMembro+" >> "+email+" >> "+name+" >> "+cognome+" >> "+ruolo);
     }
 
     const classes = useStyles();

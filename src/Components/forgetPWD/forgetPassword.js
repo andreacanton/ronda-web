@@ -14,6 +14,7 @@ import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import { isExpired } from "react-jwt";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import MuiAlert from '@material-ui/lab/Alert';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(3, 0, 2),
     },
   }));
+
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const ForgetPassword = () => {
     const history = useHistory();
@@ -59,13 +64,15 @@ const ForgetPassword = () => {
     }
     const resetPassword = (e) =>{
         e.preventDefault();
+        if(emailpwd === ""){
+            setMessage("Inserisci un Email Valida");
+        }
         axios.post('http://localhost:3000/auth/forgot-password?resetUrl='+window.location.href,{
             identity:emailpwd,
         }).then((response)=>{
             if(response.status === 200){
                 setStatus(true);
                 setSuccess(true);
-                console.log(response);
             }
         },(errors)=>{
             setError(true);
@@ -91,12 +98,15 @@ const ForgetPassword = () => {
                     }
                 },(error)=>{
                     setgenericError("Oh no! c'è stato un imprevisto durante la tua richiesta");
+                    setErrPass('');
                 });
             }else{
+                setgenericError('');
                 setErrPass("Inserisci due password uguali");
             }
         }
     }
+
 
     let linkResetPassword = window.location.href;
     if (!linkResetPassword.includes('?')) {
@@ -114,7 +124,7 @@ const ForgetPassword = () => {
                         </Toolbar>
                     </AppBar>
                 </div>
-                { error ? <div className="error__banner">{message}</div> : <div></div>}
+                { error ?<Alert severity="error">{message}</Alert> : <div></div>}
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
                         <div className={classes.paper}>
@@ -158,6 +168,8 @@ const ForgetPassword = () => {
                             </Toolbar>
                         </AppBar>
                     </div>
+                    { genericError ?<Alert severity="error">{genericError}</Alert> : <div></div>}
+                    { errPass ?<Alert severity="error">{errPass}</Alert> : <div></div>}
                     <Container component="main" maxWidth="xs">
                     <CssBaseline />
                         <div className={classes.paper}>
@@ -170,8 +182,6 @@ const ForgetPassword = () => {
                             <form className={classes.form} noValidate>
                                 <TextField variant="outlined" margin="normal" required fullWidth type="password" id="password" label="Inserisci Password" name="password" value={pass} onChange={(e)=>setPass(e.target.value)} autoFocus/>
                                 <TextField variant="outlined" margin="normal" required fullWidth type="password" id="password-confirm" label="Ripeti Password" name="password-confirm" value={confirmPass} onChange={(e)=>setConfirmPass(e.target.value)} autoFocus/>
-                                <Typography variant="h5" style={{color:'red'}}>{errPass}</Typography>
-                                <Typography variant="h5" style={{color:'red'}}>{genericError}</Typography>
                                 <Button type="submit" fullWidth variant="contained" onClick={(e)=>ConfirmNewPassword(e,token)} color="primary" className={classes.submit}>
                                     Conferma
                                 </Button>

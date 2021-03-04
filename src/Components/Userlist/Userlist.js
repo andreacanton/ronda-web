@@ -14,7 +14,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { isExpired } from "react-jwt";
 import { useHistory } from "react-router-dom";
-import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import instance from '../axios';
 const useStyles = makeStyles((theme) => ({

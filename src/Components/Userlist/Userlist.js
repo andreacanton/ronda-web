@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import Appbar from  './Appbar';
+import Appbar from  '../Appbar';
 import { makeStyles } from '@material-ui/core/styles';
 import Listuser from './Listuser';
 import Container from '@material-ui/core/Container';
@@ -18,7 +18,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import instance from '../axios';
 const useStyles = makeStyles((theme) => ({
     container: {
-        paddingTop: theme.spacing(4),
+        paddingTop: theme.spacing(12),
         paddingBottom: theme.spacing(4),
     },
     paper: {
@@ -37,7 +37,7 @@ function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-const ITEM_HEIGHT = 48;
+const ITEM_HEIGHT = 20;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
   PaperProps: {
@@ -126,20 +126,21 @@ const Userlist = () => {
     const saveNewUser = (e) =>{
         e.preventDefault();
         instance.post('/users/?resetUrl=http%3A%2F%2Flocalhost%3A3001%2Freset-password',{
-            headers:{
-                'Authorization': `Bearer ${jwtCode}`
-            },
             firstname:name,
             lastname:cognome,
             email:email,
             password:pwd,
             memberNumber:numeroMembro,
             role:ruolo
+        },
+        {headers:{
+                'Authorization': `Bearer ${jwtCode}`
+            },
         }).then((res)=>{
             console.log(res);
         })
         .catch((err)=>{
-
+            console.log(err);
         });
         //console.log(numeroMembro+" >> "+email+" >> "+name+" >> "+cognome+" >> "+ruolo);
     }
@@ -164,17 +165,17 @@ const Userlist = () => {
                 { error ? <Alert severity="error">{error}</Alert> : <></>}
                 <DialogTitle id="responsive-dialog-title">{"Aggiungi un nuovo Utente"}</DialogTitle>
                     <DialogContent dividers={true}>
-                        <TextField  variant="outlined" autoFocus required margin="dense" id="numeromembro" label="Identificativo Membro" type="text" fullWidth value={numeroMembro} onChange={(e)=>checkMemberNumero(e, e.target.value)}/>
+                        <TextField  variant="outlined" autoFocus required margin="dense" id="numeromembro" label="Numero Socio" type="text" fullWidth value={numeroMembro} onChange={(e)=>checkMemberNumero(e, e.target.value)}/>
                         <TextField  variant="outlined" autoFocus required margin="dense" id="email" label="Indirizzo Email" type="email" fullWidth value={email} onChange={(e)=>checkEmail(e,e.target.value)}/>
                         <TextField  variant="outlined" autoFocus required margin="dense" id="password" label="Password" type="password" fullWidth value={pwd} onChange={(e)=>setPwd(e.target.value)}/>
                         <TextField  variant="outlined" autoFocus required margin="dense" id="nome" label="Nome" type="text" fullWidth value={name} onChange={(e)=>setName(e.target.value)}/>
                         <TextField  variant="outlined" autoFocus required margin="dense" id="cognome" label="Cognome" type="text" fullWidth value={cognome} onChange={(e)=>setCognome(e.target.value)}/>
                         <InputLabel id="demo-mutiple-checkbox-label">Ruolo</InputLabel>
                         <Select  fullWidth id="select-role" required abelId="Seleziona Ruolo" value={ruolo} onChange={handleChange}  MenuProps={MenuProps}>
-                            <MenuItem key="Membro" value="membro" >
-                                <ListItemText primary="Membro"/>
+                            <MenuItem key="member" value="member" >
+                                <ListItemText primary="Socio"/>
                             </MenuItem>
-                            <MenuItem key="Admin" value="Admin" >
+                            <MenuItem key="admin" value="admin" >
                                 <ListItemText primary="Admin"/>
                             </MenuItem>
                         </Select>

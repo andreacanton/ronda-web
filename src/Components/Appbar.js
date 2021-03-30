@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState, useEffect}from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -24,6 +24,9 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
+import { TrendingUpRounded } from '@material-ui/icons';
+import { isExpired, decodeToken } from "react-jwt";
+
 
 
 const drawerWidth = 240;
@@ -94,13 +97,14 @@ export default function Appbar(props) {
         history.push(`/`);
 
     }
-    const menuAdmin = ['Lista Utenti'];
-    const menuMember = ['Impostazioni Account'];
     var objToRender = [];
     const classes = useStyles();
     const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
-
+    const [open, setOpen] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
+    const jwtCode = sessionStorage.getItem('tokeJwt');
+    const decode = decodeToken(jwtCode);
+    const role = decode.role;
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -108,22 +112,26 @@ export default function Appbar(props) {
     const changePage = (e,text) =>{
       e.preventDefault();
       if(text === 'Lista Utenti'){
-        history.push(`/userList/${props.role}`);
+        history.push(`/userList/${role}`);
       }
       if(text === 'impostazioni'){
-        history.push(`/impostazioni/${props.role}`);
+        history.push(`/impostazioni/${role}`);
       }
     }
 
     const handleDrawerClose = () => {
         setOpen(false);
     };
-    if(props.role ==='admin'){
-        objToRender = menuAdmin;
-    }
-    else if(props.role ==='member'){
-        objToRender = menuMember;
-    }
+
+    useEffect(()=>{
+      if(role ==='admin'){
+        setIsAdmin(TrendingUpRounded);
+      }
+      else if(role ==='member'){
+        setIsAdmin(false);
+      } 
+    },[]);
+
 
   return (
     <div className={classes.root}>
@@ -166,19 +174,30 @@ export default function Appbar(props) {
         </div>
         <Divider />
         <List>
-            <ListItem  selected button onClick={(e)=>{ e.preventDefault(); history.push(`/Home/${props.role}`);}}>
+            <ListItem  selected button onClick={(e)=>{ e.preventDefault(); history.push(`/Home/${role}`);}}>
                 <ListItemIcon><HomeOutlinedIcon/></ListItemIcon>
                 <ListItemText>Home</ListItemText>
             </ListItem>
         </List>
-        <List>
-          { objToRender.map((text, index) => (
-            <ListItem button onClick ={(e)=>changePage(e,text)} key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <ListAltIcon /> : <AddCircleOutlineIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+       {
+          isAdmin ? 
+            <List>
+              <ListItem button onClick ={(e)=>changePage(e,"Lista Utenti")}>
+                <ListItemIcon><ListAltIcon /></ListItemIcon>
+                <ListItemText>Lista Utenti</ListItemText>
+              </ListItem>
+              <ListItem button onClick ={(e)=>changePage(e,"Lista Assistiti")}>
+                <ListItemIcon><ListAltIcon /></ListItemIcon>
+                <ListItemText>Lista Assistiti</ListItemText>
+              </ListItem>
+            </List>
+           :<List>
+              <ListItem button onClick ={(e)=>changePage(e,"Lista Assistiti")}>
+                <ListItemIcon><ListAltIcon /></ListItemIcon>
+                <ListItemText>Lista Assistiti</ListItemText>
+              </ListItem>
+            </List>
+          }
         <List>
             <ListItem button onClick={(e)=>changePage(e,"impostazioni")}>
                 <ListItemIcon><SettingsOutlinedIcon/></ListItemIcon>

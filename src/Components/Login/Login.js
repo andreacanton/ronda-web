@@ -68,7 +68,6 @@ const Login = () => {
             password: pwd
         }).then((response) => {
             const jwtCode = response.data.access_token;
-            console.log(jwtCode);
             const decode = decodeToken(jwtCode);
             const role = decode.role;
             sessionStorage.setItem('tokeJwt',jwtCode);
@@ -89,10 +88,9 @@ const Login = () => {
 
     const classes = useStyles();
     return (
-       
-        <>
+      <>
             { error ? <div className="error__banner">{message}</div> : <div></div>}
-            <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

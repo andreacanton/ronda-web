@@ -42,11 +42,11 @@ const Listuser = () => {
 
   return (
     <>
-      <h2>Lista Membri</h2>
+      <h2>Lista Utenti</h2>
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Numero Membro</TableCell>
+            <TableCell>#&nbsp;Socio</TableCell>
             <TableCell>Email</TableCell>
             <TableCell>Nome</TableCell>
             <TableCell>Ruolo</TableCell>

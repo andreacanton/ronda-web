@@ -7,12 +7,13 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import SweetAlert from 'react-bootstrap-sweetalert';
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import {Select, MenuItem, Input, ListItemText, InputLabel} from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import { isExpired } from "react-jwt";
+import {decodeToken, isExpired } from "react-jwt";
 import { useHistory } from "react-router-dom";
 import MuiAlert from '@material-ui/lab/Alert';
 import instance from '../axios';
@@ -63,6 +64,8 @@ const Userlist = () => {
     const [cognome, setCognome] = useState('');
     const jwtCode = localStorage.getItem('tokeJwt');
     const isMyTokenExpired = isExpired(jwtCode);
+    const decode = decodeToken(jwtCode);
+    const actualRole = decode.role;
     if(isMyTokenExpired){
         history.push("/");
     }
@@ -138,6 +141,9 @@ const Userlist = () => {
             },
         }).then((res)=>{
             console.log(res);
+            if(res.statusText === "OK"){
+                <SweetAlert success title={"Operazione effettuata con successo, nuovo Socio aggiunto"} confirmBtnText={"Torna alla Lista Soci"} onConfirm={()=> history.push(`/userList/${actualRole}`)}></SweetAlert>;
+            }
         })
         .catch((err)=>{
             console.log(err);
@@ -163,7 +169,7 @@ const Userlist = () => {
             </Fab>
             <Dialog fullScreen={fullScreen} open={open} onClose={handleClose}>
                 { error ? <Alert severity="error">{error}</Alert> : <></>}
-                <DialogTitle id="responsive-dialog-title">{"Aggiungi un nuovo Utente"}</DialogTitle>
+                <DialogTitle id="responsive-dialog-title">{"Aggiungi un nuovo utente"}</DialogTitle>
                     <DialogContent dividers={true}>
                         <TextField  variant="outlined" autoFocus required margin="dense" id="numeromembro" label="Numero Socio" type="text" fullWidth value={numeroMembro} onChange={(e)=>checkMemberNumero(e, e.target.value)}/>
                         <TextField  variant="outlined" autoFocus required margin="dense" id="email" label="Indirizzo Email" type="email" fullWidth value={email} onChange={(e)=>checkEmail(e,e.target.value)}/>

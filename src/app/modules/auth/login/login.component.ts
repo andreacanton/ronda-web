@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
 
@@ -16,12 +17,13 @@ import { AuthService } from '@core/services/auth.service';
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
   public controls: any;
-  public errors: any;
+  public hasAuthenticationFailed: boolean;
 
   constructor(
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
-    private readonly router: Router
+    private readonly router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -42,9 +44,11 @@ export class LoginComponent implements OnInit {
       .login(values.identity, values.password)
       .subscribe((response) => {
         if (!response.success) {
-          this.errors = response.errors;
+          this.snackBar.open('Autenticazione fallita!', 'chiudi', {
+            duration: 2000,
+          });
         } else {
-          this.router.navigate(['/']);
+          this.router.navigate(['']);
         }
       });
   }

@@ -48,7 +48,9 @@ export class AuthService {
 
   public getUserInfo(): User {
     try {
-      const payload = this.jwtHelper.decodeToken<JwtPayload>();
+      const payload = this.jwtHelper.decodeToken<JwtPayload>(
+        this.tokenService.getAccessToken()
+      );
       return {
         userId: payload.sub,
         memberNumber: payload.memberNumber,

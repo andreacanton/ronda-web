@@ -19,7 +19,7 @@ import { TokenService } from '@core/services/token.service';
 export function jwtOptionsFactory(tokenService: TokenService) {
   return {
     tokenGetter: () => {
-      return tokenService.getToken();
+      return tokenService.getAccessToken();
     },
     allowedDomains: ['localhost:3000'], //TODO: ADD PROD DOMAIN!
   };

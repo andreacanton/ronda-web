@@ -20,13 +20,14 @@ export class AuthService {
 
   public login(identity: string, password: string): Observable<LoginResponse> {
     return this.apiClient
-      .post<{ access_token: string }>('auth/login', {
+      .post<{ access_token: string; refresh_token: string }>('auth/login', {
         identity,
         password,
       })
       .pipe(
         map((response) => {
-          this.tokenService.setToken(response.access_token);
+          this.tokenService.setAccessToken(response.access_token);
+          this.tokenService.setRefreshToken(response.refresh_token);
           return {
             success: true,
             errors: null,
@@ -42,7 +43,7 @@ export class AuthService {
   }
 
   public logout() {
-    this.tokenService.resetToken();
+    this.tokenService.resetTokens();
   }
 
   public getUserInfo(): User {

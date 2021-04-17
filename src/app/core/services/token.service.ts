@@ -36,5 +36,6 @@ export class TokenService {
   public resetTokens(): void {
     localStorage.removeItem(TokenService.ACCESS_TOKEN_KEY);
     localStorage.removeItem(TokenService.REFRESH_TOKEN_KEY);
+    localStorage.removeItem(TokenService.TOKEN_EXPIRATION_KEY);
   }
 }

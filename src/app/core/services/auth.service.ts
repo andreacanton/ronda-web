@@ -8,6 +8,7 @@ import { LoginResponse } from '@core/interfaces/login-response';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TokenService } from './token.service';
 import { parse } from 'date-fns';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,8 @@ export class AuthService {
   constructor(
     private readonly apiClient: ApiClient,
     private readonly jwtHelper: JwtHelperService,
-    private readonly tokenService: TokenService
+    private readonly tokenService: TokenService,
+    private readonly router: Router
   ) {}
 
   public login(identity: string, password: string): Observable<LoginResponse> {
@@ -44,6 +46,7 @@ export class AuthService {
 
   public logout() {
     this.tokenService.resetTokens();
+    this.router.navigate(['/auth/login']);
   }
 
   public getUserInfo(): User {

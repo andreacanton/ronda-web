@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '@core/services/auth.service';
 
 @Component({
   selector: 'app-main-nav',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-nav.component.scss'],
 })
 export class MainNavComponent {
-  doLogout() {}
+  constructor(private authService: AuthService) {}
+  doLogout() {
+    this.authService.logout();
+  }
 }

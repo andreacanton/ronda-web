@@ -7,6 +7,7 @@ import { JwtPayload } from '@core/interfaces/jwt-payload';
 import { LoginResponse } from '@core/interfaces/login-response';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TokenService } from './token.service';
+import { parse } from 'date-fns';
 
 @Injectable({
   providedIn: 'root',
@@ -26,8 +27,13 @@ export class AuthService {
       })
       .pipe(
         map((response) => {
-          this.tokenService.setAccessToken(response.access_token);
-          this.tokenService.setRefreshToken(response.refresh_token);
+          const { access_token, refresh_token } = response;
+          const payload = this.jwtHelper.decodeToken<JwtPayload>(access_token);
+          this.tokenService.setExpiration(
+            parse(payload.exp.toString(), 't', new Date())
+          );
+          this.tokenService.setAccessToken(access_token);
+          this.tokenService.setRefreshToken(refresh_token);
           return {
             success: true,
             errors: null,
@@ -65,6 +71,9 @@ export class AuthService {
   }
 
   public isLoggedIn(): boolean {
-    return this.getUserInfo() !== null;
+    return (
+      this.getUserInfo() !== null &&
+      this.tokenService.getExpiration() > new Date()
+    );
   }
 }

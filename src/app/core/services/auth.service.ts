@@ -44,9 +44,9 @@ export class AuthService {
       );
   }
 
-  public logout() {
+  public async logout() {
     this.tokenService.resetTokens();
-    this.router.navigate(['/auth/login']);
+    await this.router.navigate(['/auth/login']);
   }
 
   public getUserInfo(): User {
@@ -78,6 +78,7 @@ export class AuthService {
           return true;
         }),
         catchError((errors) => {
+          this.logout();
           return of(false);
         })
       );

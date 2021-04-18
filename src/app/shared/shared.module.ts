@@ -13,6 +13,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const materialModules = [
   MatCommonModule,
@@ -27,6 +30,9 @@ const materialModules = [
   MatSnackBarModule,
   MatRippleModule,
   MatTableModule,
+  MatListModule,
+  MatDividerModule,
+  MatProgressSpinnerModule,
 ];
 const commonModules = [ReactiveFormsModule];
 @NgModule({

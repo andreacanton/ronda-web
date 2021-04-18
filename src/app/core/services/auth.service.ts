@@ -104,4 +104,13 @@ export class AuthService {
       return of(this.getUserInfo() !== null);
     }
   }
+
+  public isAdmin(): Observable<boolean> {
+    return this.isLoggedIn().pipe(
+      map((isLoggedIn) => {
+        const user = this.getUserInfo();
+        return isLoggedIn && user.role === 'admin';
+      })
+    );
+  }
 }

@@ -2,9 +2,30 @@
 
 @include mat-core();
 
-$ronda-warehouse-primary: mat-palette($mat-indigo);
-$ronda-warehouse-accent: mat-palette($mat-pink, A200, A100, A400);
-$ronda-warehouse-warn: mat-palette($mat-red);
+$primary: (
+  Main: #246184,
+  Light: #588eb4,
+  Dark: #003757,
+  contrast: (
+    Main: #f5f5f5,
+    Light: #000,
+    Dark: #fff,
+  ),
+);
+$accent: (
+  Main: #f07332,
+  Light: #ffa460,
+  Dark: #b74400,
+  contrast: (
+    Main: #000,
+    Light: #000,
+    Dark: #fff,
+  ),
+);
+
+$ronda-warehouse-primary: mat-palette($primary, Main, Light, Dark);
+$ronda-warehouse-accent: mat-palette($accent, Main, Light, Dark);
+$ronda-warehouse-warn: mat-palette($mat-red, A200, A400, A700);
 
 $ronda-warehouse-theme: mat-light-theme(
   (

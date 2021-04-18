@@ -10,6 +10,9 @@ import { User } from '../schema/user';
 export class UsersService {
   constructor(private readonly apiClient: ApiClient) {}
 
+  public getAll(): Observable<User[]> {
+    return this.apiClient.get<User[]>('users');
+  }
   public saveUser(data: Partial<User>): Observable<User> {
     return this.apiClient.post<User>('users', data);
   }

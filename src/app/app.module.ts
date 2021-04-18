@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { TokenService } from '@core/services/token.service';
+import { httpInterceptorProviders } from './http-interceptors';
 
 export function jwtOptionsFactory(tokenService: TokenService) {
   return {
@@ -56,6 +57,7 @@ export function jwtOptionsFactory(tokenService: TokenService) {
       provide: ENVIRONMENT,
       useValue: environment,
     },
+    ...httpInterceptorProviders,
   ],
   bootstrap: [AppComponent],
 })

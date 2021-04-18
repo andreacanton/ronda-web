@@ -33,6 +33,10 @@ export class TokenService {
     );
   }
 
+  public isExpired(): boolean {
+    return this.getExpiration() < new Date();
+  }
+
   public resetTokens(): void {
     localStorage.removeItem(TokenService.ACCESS_TOKEN_KEY);
     localStorage.removeItem(TokenService.REFRESH_TOKEN_KEY);

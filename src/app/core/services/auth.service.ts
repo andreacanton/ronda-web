@@ -95,7 +95,7 @@ export class AuthService {
   }
 
   public isLoggedIn(): Observable<boolean> {
-    if (this.tokenService.getExpiration() < new Date()) {
+    if (this.tokenService.isExpired()) {
       return this.refreshToken().pipe(
         map((refreshed) => {
           return refreshed && this.getUserInfo() !== null;

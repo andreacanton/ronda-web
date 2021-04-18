@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'create',
+    redirectTo: 'list',
     pathMatch: 'full',
   },
   {
@@ -14,6 +15,10 @@ const routes: Routes = [
       {
         path: 'create',
         component: CreateUserComponent,
+      },
+      {
+        path: 'list',
+        component: UserListComponent,
       },
     ],
   },

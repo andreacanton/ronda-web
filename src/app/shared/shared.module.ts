@@ -12,7 +12,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+
 const materialModules = [
   MatCommonModule,
   MatToolbarModule,
@@ -25,6 +26,7 @@ const materialModules = [
   MatSelectModule,
   MatSnackBarModule,
   MatRippleModule,
+  MatTableModule,
 ];
 const commonModules = [ReactiveFormsModule];
 @NgModule({

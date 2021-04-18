@@ -1,4 +1,7 @@
 <h1>Lista volontari</h1>
+<div class="spinner-container" *ngIf="dataSource.loading$ | async">
+  <mat-spinner></mat-spinner>
+</div>
 <table mat-table [dataSource]="dataSource">
   <ng-container matColumnDef="memberNumber">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>N. Socio</th>
@@ -28,15 +31,6 @@
       <ng-container *ngIf="row.status === 'disabled'">Disabiltato</ng-container>
     </td>
   </ng-container>
-  <tr
-    mat-header-row
-    *matHeaderRowDef="['memberNumber', 'firstname', 'email', 'role', 'status']"
-  ></tr>
-  <tr
-    mat-row
-    *matRowDef="
-      let row;
-      columns: ['memberNumber', 'firstname', 'email', 'role', 'status']
-    "
-  ></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>

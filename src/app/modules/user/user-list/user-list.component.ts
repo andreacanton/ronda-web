@@ -14,6 +14,13 @@ export class UserListComponent implements OnInit {
 
   constructor(private readonly userService: UsersService) {}
 
+  public displayedColumns = [
+    'memberNumber',
+    'firstname',
+    'email',
+    'role',
+    'status',
+  ];
   ngOnInit(): void {
     this.dataSource = new UsersDataSource(this.userService);
     this.dataSource.loadUsers();

@@ -68,7 +68,9 @@ export class CreateUserComponent implements OnInit {
         },
         (error) => {
           this.userForm.enable();
-          this.snackBar.open('Errore nel salvataggio!');
+          this.snackBar.open('Errore nel salvataggio!', 'ignora', {
+            duration: 2000,
+          });
         }
       );
     }

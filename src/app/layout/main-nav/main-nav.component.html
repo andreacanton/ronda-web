@@ -29,7 +29,7 @@
       </li>
     </ul>
   </section>
-  <section>
+  <section *ngIf="isAdmin() | async">
     <h2><mat-icon>person</mat-icon> Volontari</h2>
     <ul>
       <li>

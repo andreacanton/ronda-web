@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-main-nav',
@@ -8,7 +9,11 @@ import { AuthService } from '@core/services/auth.service';
 })
 export class MainNavComponent {
   constructor(private authService: AuthService) {}
-  doLogout() {
+
+  public isAdmin(): Observable<boolean> {
+    return this.authService.isAdmin();
+  }
+  public doLogout() {
     this.authService.logout();
   }
 }

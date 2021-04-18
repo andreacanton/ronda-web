@@ -35,9 +35,11 @@ const materialModules = [
   MatProgressSpinnerModule,
 ];
 const commonModules = [ReactiveFormsModule];
+
+const directives = [];
 @NgModule({
   declarations: [],
-  imports: [...commonModules, ...materialModules],
-  exports: [...commonModules, ...materialModules],
+  imports: [...commonModules, ...materialModules, ...directives],
+  exports: [...commonModules, ...materialModules, ...directives],
 })
 export class SharedModule {}

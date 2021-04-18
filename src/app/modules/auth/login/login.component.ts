@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
       .login(values.identity, values.password)
       .subscribe((response) => {
         if (!response.success) {
-          this.snackBar.open('Autenticazione fallita!', 'chiudi', {
+          this.snackBar.open('Autenticazione fallita!', 'ignora', {
             duration: 2000,
           });
         } else {

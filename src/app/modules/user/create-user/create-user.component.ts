@@ -62,7 +62,9 @@ export class CreateUserComponent implements OnInit {
       this.userService.saveUser(this.userForm.value).subscribe(
         (res) => {
           this.userForm.enable();
-          this.snackBar.open('Utente registrato correttamente!');
+          this.snackBar.open('Utente registrato correttamente!', 'ignora', {
+            duration: 2000,
+          });
         },
         (error) => {
           this.userForm.enable();

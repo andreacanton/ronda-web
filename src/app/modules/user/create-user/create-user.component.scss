@@ -1,9 +1,12 @@
-:host {
+.mat-card-content {
   display: flex;
-  max-width: 500px;
-  margin: 20px auto;
   flex-direction: column;
 }
-mat-form-field {
-  width: 100%;
+
+.mat-card-actions {
+  margin: 0;
+}
+
+.mat-card > .mat-card-actions:last-child {
+  margin: 0;
 }

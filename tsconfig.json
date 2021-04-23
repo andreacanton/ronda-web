@@ -19,5 +19,8 @@
       "@core/*": ["src/app/core/*"],
       "@modules/*": ["src/app/modules/*"]
     }
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true
   }
 }

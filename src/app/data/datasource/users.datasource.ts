@@ -1,6 +1,7 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
+import { UsersFilters } from '../interfaces/users.filters';
 import { User } from '../schema/user';
 import { UsersService } from '../services/users.service';
 
@@ -22,10 +23,10 @@ export class UsersDataSource implements DataSource<User> {
     this.loadingSubject.complete();
   }
 
-  loadUsers() {
+  public loadUsers(filters: UsersFilters): void {
     this.loadingSubject.next(true);
     this.usersService
-      .getAll()
+      .getAll(filters)
       .pipe(
         catchError(() => of([])),
         finalize(() => this.loadingSubject.next(false))

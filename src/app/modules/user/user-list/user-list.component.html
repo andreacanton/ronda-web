@@ -1,4 +1,7 @@
 <h1>Lista volontari</h1>
+<mat-toolbar color="default">
+  <a mat-button routerLink="/users/create">Registra Volontari&#601;</a>
+</mat-toolbar>
 <div class="spinner-container" *ngIf="dataSource.loading$ | async">
   <mat-spinner></mat-spinner>
 </div>

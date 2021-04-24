@@ -21,6 +21,9 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
+    if (request.url.includes('auth/refresh')) {
+      return next.handle(request);
+    }
     return this.authService.isLoggedIn().pipe(
       switchMap((isLoggedIn) => {
         if (isLoggedIn) {

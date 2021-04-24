@@ -9,21 +9,22 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { TokenService } from './token.service';
 import { parse } from 'date-fns';
 import { Router } from '@angular/router';
+import { TokenResponse } from '@core/interfaces/token-response';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private jwtHelper = new JwtHelperService();
   constructor(
     private readonly apiClient: ApiClient,
-    private readonly jwtHelper: JwtHelperService,
     private readonly tokenService: TokenService,
     private readonly router: Router
   ) {}
 
   public login(identity: string, password: string): Observable<LoginResponse> {
     return this.apiClient
-      .post<{ access_token: string; refresh_token: string }>('auth/login', {
+      .post<TokenResponse>('auth/login', {
         identity,
         password,
       })
@@ -67,24 +68,24 @@ export class AuthService {
     }
   }
 
-  public refreshToken(): Observable<boolean> {
+  public refreshToken(): Observable<TokenResponse> {
     return this.apiClient
-      .post<{ access_token: string; refresh_token: string }>('auth/refresh', {
+      .post<TokenResponse>('auth/refresh', {
         refreshToken: this.tokenService.getRefreshToken(),
       })
       .pipe(
         map((response) => {
           this.setTokens(response);
-          return true;
+          return response;
         }),
         catchError((errors) => {
           this.logout();
-          return of(false);
+          return of(null);
         })
       );
   }
 
-  private setTokens(response: { access_token: string; refresh_token: string }) {
+  private setTokens(response: TokenResponse): void {
     const { access_token, refresh_token } = response;
     const payload = this.jwtHelper.decodeToken<JwtPayload>(access_token);
     this.tokenService.setExpiration(
@@ -94,16 +95,20 @@ export class AuthService {
     this.tokenService.setRefreshToken(refresh_token);
   }
 
-  public isLoggedIn(): Observable<boolean> {
+  public getAccessToken(): Observable<string> {
     if (this.tokenService.isExpired()) {
       return this.refreshToken().pipe(
-        map((refreshed) => {
-          return refreshed && this.getUserInfo() !== null;
+        map((response) => {
+          return response.access_token;
         })
       );
     } else {
-      return of(this.getUserInfo() !== null);
+      return of(this.tokenService.getAccessToken());
     }
+  }
+
+  public isLoggedIn(): Observable<boolean> {
+    return this.getAccessToken().pipe(map((token) => !!token));
   }
 
   public isAdmin(): Observable<boolean> {

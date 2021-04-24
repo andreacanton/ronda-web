@@ -24,13 +24,15 @@ export class AuthInterceptor implements HttpInterceptor {
     if (request.url.includes('auth/refresh')) {
       return next.handle(request);
     }
-    return this.authService.isLoggedIn().pipe(
-      switchMap((isLoggedIn) => {
-        if (isLoggedIn) {
-          request.headers.append(
-            'Authorization',
-            `Bearer ${this.tokenService.getAccessToken()}`
-          );
+    return this.authService.getAccessToken().pipe(
+      switchMap((token) => {
+        if (token) {
+          const authorizedRequest = request.clone({
+            setHeaders: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          return next.handle(authorizedRequest);
         }
         return next.handle(request);
       })

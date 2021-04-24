@@ -14,17 +14,8 @@ import { AuthModule } from './modules/auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { TokenService } from '@core/services/token.service';
 import { httpInterceptorProviders } from './http-interceptors';
-
-export function jwtOptionsFactory(tokenService: TokenService) {
-  return {
-    tokenGetter: () => {
-      return tokenService.getAccessToken();
-    },
-    allowedDomains: ['localhost:3000'], //TODO: ADD PROD DOMAIN!
-  };
-}
+import { AuthService } from '@core/services/auth.service';
 
 @NgModule({
   declarations: [
@@ -40,13 +31,6 @@ export function jwtOptionsFactory(tokenService: TokenService) {
     AuthModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    JwtModule.forRoot({
-      jwtOptionsProvider: {
-        provide: JWT_OPTIONS,
-        useFactory: jwtOptionsFactory,
-        deps: [TokenService],
-      },
-    }),
   ],
   providers: [
     {

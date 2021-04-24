@@ -17,6 +17,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSortModule } from '@angular/material/sort';
 
 const materialModules = [
   MatCommonModule,
@@ -35,6 +36,7 @@ const materialModules = [
   MatDividerModule,
   MatProgressSpinnerModule,
   MatMenuModule,
+  MatSortModule,
 ];
 const commonModules = [ReactiveFormsModule];
 

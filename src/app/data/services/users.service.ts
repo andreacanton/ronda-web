@@ -15,10 +15,12 @@ export class UsersService {
     const params: any = {
       p: filters.page,
       psize: filters.pageSize,
-      sort: filters.sort,
-      dir: filters.sortDir,
     };
-    const { search, status, role } = filters;
+    const { search, status, role, sort } = filters;
+    if (sort && sort.active && sort.direction) {
+      params.sort = sort.active;
+      params.sortDir = sort.direction;
+    }
     if (search) {
       params.search = search;
     }

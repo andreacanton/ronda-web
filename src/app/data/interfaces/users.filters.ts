@@ -1,8 +1,9 @@
+import { Sort } from '@angular/material/sort';
+
 export interface UsersFilters {
   page: number;
   pageSize: number;
-  sort: string;
-  sortDir: 'asc' | 'desc';
+  sort?: Sort;
   search?: string;
   status?: string;
   role?: string;

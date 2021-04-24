@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { Sort } from '@angular/material/sort';
 import { Observable, Subscription } from 'rxjs';
 import { UsersDataSource } from 'src/app/data/datasource/users.datasource';
 import { UsersFilters } from 'src/app/data/interfaces/users.filters';
@@ -25,8 +26,10 @@ export class UserListComponent implements OnInit, OnDestroy {
   public filters: UsersFilters = {
     page: 1,
     pageSize: 10,
-    sort: 'memberNumber',
-    sortDir: 'asc',
+    sort: {
+      active: 'memberNumber',
+      direction: 'asc',
+    },
   };
 
   constructor(
@@ -36,7 +39,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   public displayedColumns = [
     'memberNumber',
-    'firstname',
+    'lastname',
     'email',
     'role',
     'status',
@@ -50,5 +53,9 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.loadingSubscription.unsubscribe();
+  }
+  public sortData(sort: Sort): void {
+    this.filters.sort = sort;
+    this.dataSource.loadUsers(this.filters);
   }
 }

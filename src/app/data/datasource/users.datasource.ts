@@ -8,7 +8,6 @@ import { UsersService } from '../services/users.service';
 export class UsersDataSource implements DataSource<User> {
   private usersSubject = new BehaviorSubject<User[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);
-
   public loading$ = this.loadingSubject.asObservable();
 
   constructor(private readonly usersService: UsersService) {}
@@ -28,7 +27,7 @@ export class UsersDataSource implements DataSource<User> {
     this.usersService
       .getAll(filters)
       .pipe(
-        catchError(() => of([])),
+        catchError(() => of([] as User[])),
         finalize(() => this.loadingSubject.next(false))
       )
       .subscribe((users) => this.usersSubject.next(users));

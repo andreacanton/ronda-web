@@ -48,6 +48,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.dataSource = new UsersDataSource(this.userService);
     this.dataSource.loadUsers(this.filters);
     this.loadingSubscription = this.dataSource.loading$.subscribe((loading) => {
+      console.log('loading:', loading);
       this.changeDetection.markForCheck();
     });
   }

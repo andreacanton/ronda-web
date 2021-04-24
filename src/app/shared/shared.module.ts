@@ -16,6 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatMenuModule } from '@angular/material/menu';
 
 const materialModules = [
   MatCommonModule,
@@ -33,6 +34,7 @@ const materialModules = [
   MatListModule,
   MatDividerModule,
   MatProgressSpinnerModule,
+  MatMenuModule,
 ];
 const commonModules = [ReactiveFormsModule];
 

@@ -1,45 +1,15 @@
-<mat-nav-list>
-  <h3 matSubheader><mat-icon>shopping_bag</mat-icon> Ordini</h3>
-  <mat-list-item>
-    <a routerLink="orders/create">
-      <span>Nuovo ordine</span>
-    </a>
-  </mat-list-item>
-  <mat-list-item>
-    <a routerLink="orders/">
-      <span>Lista ordini</span>
-    </a>
-  </mat-list-item>
-  <mat-divider></mat-divider>
-  <h3 matSubheader><mat-icon>emoji_people</mat-icon> Assistiti</h3>
-  <mat-list-item>
-    <a routerLink="recipients/create">
-      <span>Registra assistito</span>
-    </a>
-  </mat-list-item>
-  <mat-list-item>
-    <a routerLink="recipients/">
-      <span>Lista assistiti</span>
-    </a>
-  </mat-list-item>
-  <mat-divider></mat-divider>
-  <ng-container *ngIf="isAdmin() | async">
-    <h3 matSubheader><mat-icon>person</mat-icon> Volontari</h3>
-    <mat-list-item>
-      <a routerLink="users/create">
-        <span>Registra volontario</span>
-      </a>
-    </mat-list-item>
-    <mat-list-item>
-      <a routerLink="users/">
-        <span>Lista volontari</span>
-      </a>
-    </mat-list-item>
-    <mat-divider></mat-divider>
-  </ng-container>
-  <mat-list-item (click)="doLogout()">
-    <a>
-      <span>Logout</span>
-    </a>
-  </mat-list-item>
-</mat-nav-list>
+<nav>
+  <ul>
+    <li>
+      <a routerLink="orders" [class.current]="isCurrent.orders">Ordini</a>
+    </li>
+    <li>
+      <a routerLink="recipients" [class.current]="isCurrent.recipients"
+        >Assistiti</a
+      >
+    </li>
+    <li *ngIf="isAdmin$ | async">
+      <a routerLink="users" [class.current]="isCurrent.users">Volontari</a>
+    </li>
+  </ul>
+</nav>

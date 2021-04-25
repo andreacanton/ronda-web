@@ -13,12 +13,12 @@ import { User } from 'src/app/data/schema/user';
 import { UsersService } from 'src/app/data/services/users.service';
 
 @Component({
-  selector: 'app-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss'],
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserListComponent implements OnInit, OnDestroy {
+export class UsersComponent implements OnInit, OnDestroy {
   public dataSource: PaginatedDataSource<User, UsersQuery>;
   public loadingSubscription: Subscription;
 

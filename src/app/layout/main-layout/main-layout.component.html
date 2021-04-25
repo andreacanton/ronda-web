@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" class="">
+<mat-toolbar color="primary" class="mat-elevation-z6">
   <mat-toolbar-row>
     <figure class="logo">
       <img src="/assets/logo-mini.svg" alt="Ronda della Carità" />
@@ -12,11 +12,11 @@
   <mat-toolbar-row class="navigation-row">
     <app-main-nav></app-main-nav>
   </mat-toolbar-row>
+  <mat-menu #profileMenu="matMenu">
+    <a routerLink="profile" mat-menu-item>Profilo</a>
+    <button (click)="doLogout()" mat-menu-item>Esci</button>
+  </mat-menu>
 </mat-toolbar>
-<mat-menu #profileMenu="matMenu">
-  <a routerLink="profile" mat-menu-item>Profilo</a>
-  <button (click)="doLogout()" mat-menu-item>Esci</button>
-</mat-menu>
 <div class="main-wrapper">
   <router-outlet></router-outlet>
 </div>

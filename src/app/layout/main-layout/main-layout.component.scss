@@ -2,6 +2,11 @@
 
 .mat-toolbar {
   transition: all 1s ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
 }
 .inline-navigation {
   display: none;
@@ -28,6 +33,10 @@
   }
 }
 
+.main-wrapper {
+  padding-top: 93px;
+}
+
 @include breakpoint(phablet) {
   .inline-navigation {
     display: block;
@@ -36,11 +45,14 @@
     display: none;
   }
   .logo {
-    padding: 5px;
+    padding: 2px;
     img {
-      width: 60px;
-      height: 60px;
+      width: 55px;
+      height: 55px;
     }
+  }
+  .main-wrapper {
+    padding-top: 64px;
   }
 }
 

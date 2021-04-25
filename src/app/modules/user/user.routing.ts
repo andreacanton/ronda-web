@@ -6,21 +6,11 @@ import { UsersComponent } from './users/users.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'list',
-    pathMatch: 'full',
+    component: UsersComponent,
   },
   {
-    path: '',
-    children: [
-      {
-        path: 'create',
-        component: CreateUserComponent,
-      },
-      {
-        path: 'list',
-        component: UsersComponent,
-      },
-    ],
+    path: 'create',
+    component: CreateUserComponent,
   },
 ];
 

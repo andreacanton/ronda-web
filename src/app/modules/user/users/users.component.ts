@@ -5,14 +5,12 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Sort } from '@angular/material/sort';
 import { Subscription } from 'rxjs';
 import { PaginatedDataSource } from 'src/app/data/datasource/paginated.datasource';
 import { UsersQuery } from 'src/app/data/interfaces/users.query';
 import { User } from 'src/app/data/schema/user';
 import { UsersService } from 'src/app/data/services/users.service';
-import { UsersFiltersSheetComponent } from '../users-filters-sheet/users-filters-sheet.component';
 
 @Component({
   selector: 'app-users',
@@ -31,8 +29,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly userService: UsersService,
-    private readonly changeDetection: ChangeDetectorRef,
-    private readonly filtersSheet: MatBottomSheet
+    private readonly changeDetection: ChangeDetectorRef
   ) {}
 
   public displayedColumns = [
@@ -55,11 +52,5 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.loadingSubscription.unsubscribe();
-  }
-
-  openFiltersSheet(): void {
-    this.filtersSheet.open(UsersFiltersSheetComponent, {
-      data: this.dataSource,
-    });
   }
 }

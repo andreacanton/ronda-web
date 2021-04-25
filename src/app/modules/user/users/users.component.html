@@ -1,18 +1,18 @@
 <mat-toolbar>
-  <h1>Lista Volontari</h1>
-</mat-toolbar>
-<div class="topbar">
-  <div class="main-actions">
+  <mat-toolbar-row>
+    <h1>Lista Volontari</h1>
+  </mat-toolbar-row>
+  <mat-toolbar-row>
     <a mat-raised-button color="primary" routerLink="/users/create">
       Registra Volontari&#601;
     </a>
-  </div>
-  <span class="spacer"></span>
-  <button mat-icon-button class="toggle-filters" (click)="openFiltersSheet()">
-    <mat-icon> manage_search </mat-icon>
-  </button>
-  <app-users-filters [dataSource]="dataSource"></app-users-filters>
-</div>
+    <span class="spacer"></span>
+    <app-users-filters
+      [dataSource]="dataSource"
+      class="user-filters"
+    ></app-users-filters>
+  </mat-toolbar-row>
+</mat-toolbar>
 <div class="listing-wrapper">
   <div class="spinner-container" *ngIf="dataSource.loading$ | async">
     <mat-spinner></mat-spinner>

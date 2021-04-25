@@ -1,3 +1,6 @@
+<button mat-icon-button class="toggle-filters" (click)="openFiltersSheet()">
+  <mat-icon> manage_search </mat-icon>
+</button>
 <div class="filters">
   <mat-form-field>
     <mat-icon matPrefix>search</mat-icon>
@@ -6,7 +9,7 @@
       (afterValueChanged)="dataSource.queryBy({ search: in.value })"
       type="text"
       matInput
-      placeholder="Search"
+      placeholder="Cerca"
     />
   </mat-form-field>
   <mat-form-field>

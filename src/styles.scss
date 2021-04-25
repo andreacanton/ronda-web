@@ -19,36 +19,12 @@ a {
 .spacer {
   flex: 1 1 auto;
 }
-.topbar {
-  display: flex;
-  padding: 20px;
-  .main-actions {
-    display: flex;
-    align-items: center;
-  }
-  .filters {
-    display: none;
+
+.filters {
+  .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
   }
 }
 
 @include breakpoint(tablet) {
-  .topbar {
-    display: flex;
-    .main-actions {
-      display: flex;
-      align-items: center;
-    }
-    .toggle-filters {
-      display: none;
-    }
-    .filters {
-      display: flex;
-      .mat-form-field + .mat-form-field {
-        margin-left: 10px;
-      }
-      .mat-form-field-wrapper {
-        padding-bottom: 0;
-      }
-    }
-  }
 }

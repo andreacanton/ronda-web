@@ -1,0 +1,17 @@
+@import "../../../../functions";
+
+.filters {
+  display: none;
+}
+
+@include breakpoint(tablet) {
+  .toggle-filters {
+    display: none;
+  }
+  .filters {
+    display: flex;
+    .mat-form-field + .mat-form-field {
+      margin-left: 10px;
+    }
+  }
+}

@@ -2,25 +2,30 @@ import { Injectable } from '@angular/core';
 import { ApiClient } from '@core/services/api.client';
 import { EMPTY, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { UsersFilters } from '../interfaces/users.filters';
+import { UsersQuery } from '../interfaces/users.query';
+import { Page, PageRequest, PaginatedService } from '../interfaces/page';
 import { User } from '../schema/user';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UsersService {
+export class UsersService implements PaginatedService<User, UsersQuery> {
   constructor(private readonly apiClient: ApiClient) {}
 
-  public getAll(filters: UsersFilters): Observable<User[]> {
+  public fetch(
+    query: UsersQuery,
+    pageRequest: PageRequest
+  ): Observable<Page<User>> {
+    const { page, size, sort } = pageRequest;
     const params: any = {
-      p: filters.page,
-      psize: filters.pageSize,
+      p: page + 1,
+      psize: size,
     };
-    const { search, status, role, sort } = filters;
     if (sort && sort.active && sort.direction) {
       params.sort = sort.active;
       params.sortDir = sort.direction;
     }
+    const { search, status, role } = query;
     if (search) {
       params.search = search;
     }
@@ -30,7 +35,7 @@ export class UsersService {
     if (role) {
       params.role = role;
     }
-    return this.apiClient.get<User[]>('users', {
+    return this.apiClient.get<Page<User>>('users', {
       params,
     });
   }

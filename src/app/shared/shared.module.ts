@@ -18,6 +18,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const materialModules = [
   MatCommonModule,
@@ -37,6 +38,7 @@ const materialModules = [
   MatProgressSpinnerModule,
   MatMenuModule,
   MatSortModule,
+  MatPaginatorModule,
 ];
 const commonModules = [ReactiveFormsModule];
 

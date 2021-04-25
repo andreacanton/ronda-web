@@ -6,9 +6,9 @@ import {
   OnInit,
 } from '@angular/core';
 import { Sort } from '@angular/material/sort';
-import { Observable, Subscription } from 'rxjs';
-import { UsersDataSource } from 'src/app/data/datasource/users.datasource';
-import { UsersFilters } from 'src/app/data/interfaces/users.filters';
+import { Subscription } from 'rxjs';
+import { PaginatedDataSource } from 'src/app/data/datasource/paginated.datasource';
+import { UsersQuery } from 'src/app/data/interfaces/users.query';
 import { User } from 'src/app/data/schema/user';
 import { UsersService } from 'src/app/data/services/users.service';
 
@@ -19,17 +19,12 @@ import { UsersService } from 'src/app/data/services/users.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserListComponent implements OnInit, OnDestroy {
-  public dataSource: UsersDataSource;
-
+  public dataSource: PaginatedDataSource<User, UsersQuery>;
   public loadingSubscription: Subscription;
 
-  public filters: UsersFilters = {
-    page: 1,
-    pageSize: 10,
-    sort: {
-      active: 'memberNumber',
-      direction: 'asc',
-    },
+  public initialSort: Sort = {
+    active: 'memberNumber',
+    direction: 'asc',
   };
 
   constructor(
@@ -45,18 +40,17 @@ export class UserListComponent implements OnInit, OnDestroy {
     'status',
   ];
   ngOnInit(): void {
-    this.dataSource = new UsersDataSource(this.userService);
-    this.dataSource.loadUsers(this.filters);
+    this.dataSource = new PaginatedDataSource<User, UsersQuery>(
+      this.userService,
+      this.initialSort,
+      {},
+      10
+    );
     this.loadingSubscription = this.dataSource.loading$.subscribe((loading) => {
-      console.log('loading:', loading);
       this.changeDetection.markForCheck();
     });
   }
   ngOnDestroy(): void {
     this.loadingSubscription.unsubscribe();
-  }
-  public sortData(sort: Sort): void {
-    this.filters.sort = sort;
-    this.dataSource.loadUsers(this.filters);
   }
 }

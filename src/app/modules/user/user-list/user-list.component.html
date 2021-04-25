@@ -11,9 +11,9 @@
     matSort
     [class.loading]="dataSource.loading$ | async"
     [dataSource]="dataSource"
-    (matSortChange)="sortData($event)"
-    [matSortActive]="filters.sort.active"
-    [matSortDirection]="filters.sort.direction"
+    (matSortChange)="dataSource.sortBy($event)"
+    [matSortActive]="initialSort.active"
+    [matSortDirection]="initialSort.direction"
   >
     <ng-container matColumnDef="memberNumber">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>N. Socio</th>
@@ -48,4 +48,13 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+  <mat-paginator
+    *ngIf="dataSource.page$ | async as page"
+    [length]="page.pagination.rowCount"
+    [pageSize]="page.pagination.pageSize"
+    [pageIndex]="page.pagination.page - 1"
+    [hidePageSize]="true"
+    (page)="dataSource.fetch($event.pageIndex)"
+  >
+  </mat-paginator>
 </div>

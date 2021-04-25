@@ -19,6 +19,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { AfterValueChangedDirective } from './directive/after-value-changed.directive';
 
 const materialModules = [
   MatCommonModule,
@@ -42,10 +43,10 @@ const materialModules = [
 ];
 const commonModules = [ReactiveFormsModule];
 
-const directives = [];
+const directives = [AfterValueChangedDirective];
 @NgModule({
-  declarations: [],
-  imports: [...commonModules, ...materialModules, ...directives],
+  declarations: [...directives],
+  imports: [...commonModules, ...materialModules],
   exports: [...commonModules, ...materialModules, ...directives],
 })
 export class SharedModule {}

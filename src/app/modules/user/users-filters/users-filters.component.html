@@ -3,7 +3,7 @@
     <mat-icon matPrefix>search</mat-icon>
     <input
       #in
-      (input)="dataSource.queryBy({ search: in.value })"
+      (afterValueChanged)="dataSource.queryBy({ search: in.value })"
       type="text"
       matInput
       placeholder="Search"

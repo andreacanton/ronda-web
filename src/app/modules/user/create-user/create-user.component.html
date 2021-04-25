@@ -1,4 +1,9 @@
-<h1>Registra volontario</h1>
+<mat-toolbar>
+  <a mat-icon-button routerLink="/users">
+    <mat-icon>arrow_back</mat-icon>
+  </a>
+  <h1>Registra Volontari&#601;</h1>
+</mat-toolbar>
 <form [formGroup]="userForm" (submit)="onSubmit()">
   <mat-card>
     <mat-card-content>
@@ -55,9 +60,7 @@
       <button mat-raised-button color="primary" type="submit">
         Crea utente
       </button>
-      <a mat-raised-button (click)="generatePassword()">
-        Genera una password causale
-      </a>
+      <a mat-raised-button (click)="generatePassword()">Genera password</a>
     </mat-card-actions>
   </mat-card>
 </form>

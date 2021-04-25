@@ -1,0 +1,17 @@
+@import "../../../../variables";
+
+$ronda-palette: map-get($ronda-warehouse-theme, primary);
+
+form {
+  .mat-form-field {
+    width: 100%;
+  }
+  .actions {
+    button {
+      width: 100%;
+      border: 0;
+      background-color: mat-color($ronda-palette, default);
+      color: mat-color($ronda-palette, darker-contrast);
+    }
+  }
+}

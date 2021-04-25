@@ -8,7 +8,7 @@
     </a>
   </div>
   <span class="spacer"></span>
-  <button mat-icon-button class="toggle-filters">
+  <button mat-icon-button class="toggle-filters" (click)="openFiltersSheet()">
     <mat-icon> manage_search </mat-icon>
   </button>
   <app-users-filters [dataSource]="dataSource"></app-users-filters>

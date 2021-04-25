@@ -1,0 +1,25 @@
+<form [formGroup]="filtersForm" (submit)="onSubmit()">
+  <mat-form-field>
+    <mat-icon matPrefix>search</mat-icon>
+    <input type="text" matInput placeholder="Search" formControlName="search" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Ruolo</mat-label>
+    <mat-select formControlName="role">
+      <mat-option>Tutti</mat-option>
+      <mat-option value="admin">Amministratore</mat-option>
+      <mat-option value="member">Volontario</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Stato</mat-label>
+    <mat-select formControlName="status">
+      <mat-option>Tutti</mat-option>
+      <mat-option value="enabled">Abilitato</mat-option>
+      <mat-option value="disabled">Disabilitato</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="actions">
+    <button mat-raised-button color="primary">Filtra</button>
+  </div>
+</form>

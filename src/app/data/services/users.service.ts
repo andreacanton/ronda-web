@@ -27,7 +27,7 @@ export class UsersService implements PaginatedService<User, UsersQuery> {
     }
     const { search, status, role } = query;
     if (search) {
-      params.search = search;
+      params.q = search;
     }
     if (status) {
       params.status = status;

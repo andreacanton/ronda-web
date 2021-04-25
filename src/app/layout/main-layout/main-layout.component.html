@@ -1,17 +1,22 @@
-<mat-toolbar color="primary">
-  <figure class="logo">
-    <img src="/assets/logo-mini.svg" alt="Ronda della Carità" />
-  </figure>
-  <app-main-nav></app-main-nav>
-  <span class="spacer"></span>
-  <button mat-icon-button [matMenuTriggerFor]="profileMenu">
-    <mat-icon>account_circle</mat-icon>
-  </button>
-  <mat-menu #profileMenu="matMenu">
-    <a routerLink="profile" mat-menu-item>Profilo</a>
-    <button (click)="doLogout()" mat-menu-item>Esci</button>
-  </mat-menu>
+<mat-toolbar color="primary" class="">
+  <mat-toolbar-row>
+    <figure class="logo">
+      <img src="/assets/logo-mini.svg" alt="Ronda della Carità" />
+    </figure>
+    <app-main-nav class="inline-navigation"></app-main-nav>
+    <span class="spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="profileMenu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </mat-toolbar-row>
+  <mat-toolbar-row class="navigation-row">
+    <app-main-nav></app-main-nav>
+  </mat-toolbar-row>
 </mat-toolbar>
+<mat-menu #profileMenu="matMenu">
+  <a routerLink="profile" mat-menu-item>Profilo</a>
+  <button (click)="doLogout()" mat-menu-item>Esci</button>
+</mat-menu>
 <div class="main-wrapper">
   <router-outlet></router-outlet>
 </div>

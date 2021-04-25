@@ -1,15 +1,16 @@
 <nav>
-  <ul>
-    <li>
-      <a routerLink="orders" [class.current]="isCurrent.orders">Ordini</a>
-    </li>
-    <li>
-      <a routerLink="recipients" [class.current]="isCurrent.recipients"
-        >Assistiti</a
-      >
-    </li>
-    <li *ngIf="isAdmin$ | async">
-      <a routerLink="users" [class.current]="isCurrent.users">Volontari</a>
-    </li>
-  </ul>
+  <a mat-ripple routerLink="orders" [class.current]="isCurrent.orders">
+    Ordini
+  </a>
+  <a mat-ripple routerLink="recipients" [class.current]="isCurrent.recipients">
+    Assistiti
+  </a>
+  <a
+    *ngIf="isAdmin$ | async"
+    mat-ripple
+    routerLink="users"
+    [class.current]="isCurrent.users"
+  >
+    Volontari
+  </a>
 </nav>

@@ -3,21 +3,28 @@
 .mat-toolbar {
   transition: all 1s ease-in-out;
 }
+.inline-navigation {
+  display: none;
+}
+.navigation-row {
+  padding: 0;
+  height: 37px;
+}
 
 .logo {
   background-color: white;
   border-radius: 50%;
-  padding: 3px;
+  padding: 1px;
   margin: 0;
   margin-right: 10px;
   transition: all 1s ease-in-out;
   img {
     transition: all 1s ease-in-out;
-    width: 52px;
-    height: 52px;
+    width: 46px;
+    height: 46px;
     margin: 0;
     padding: 0;
-    margin-bottom: -8px;
+    margin-bottom: -9px;
   }
 }
 
@@ -25,11 +32,13 @@
   padding-top: 30px;
 }
 
-@include breakpoint(tablet) {
-  .main-wrapper {
-    padding: 30px;
+@include breakpoint(phablet) {
+  .inline-navigation {
+    display: block;
   }
-
+  .navigation-row {
+    display: none;
+  }
   .logo {
     padding: 5px;
     img {
@@ -37,4 +46,10 @@
       height: 60px;
     }
   }
+  .main-wrapper {
+    padding: 30px;
+  }
+}
+
+@include breakpoint(tablet) {
 }

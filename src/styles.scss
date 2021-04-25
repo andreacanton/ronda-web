@@ -21,17 +21,34 @@ a {
 }
 .topbar {
   display: flex;
+  padding: 20px;
   .main-actions {
     display: flex;
     align-items: center;
   }
-}
-.filters {
-  display: flex;
-  .mat-form-field + .mat-form-field {
-    margin-left: 10px;
+  .filters {
+    display: none;
   }
-  .mat-form-field-wrapper {
-    padding-bottom: 0;
+}
+
+@include breakpoint(tablet) {
+  .topbar {
+    display: flex;
+    .main-actions {
+      display: flex;
+      align-items: center;
+    }
+    .toggle-filters {
+      display: none;
+    }
+    .filters {
+      display: flex;
+      .mat-form-field + .mat-form-field {
+        margin-left: 10px;
+      }
+      .mat-form-field-wrapper {
+        padding-bottom: 0;
+      }
+    }
   }
 }

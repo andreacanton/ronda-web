@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { delay, map } from 'rxjs/operators';
+import { AVAILABLE_ROLES, AVAILABLE_STATUSES } from 'src/app/data/const';
 import { UsersService } from '../../../data/services/users.service';
 
 @Component({
@@ -17,6 +18,8 @@ import { UsersService } from '../../../data/services/users.service';
 })
 export class CreateUserComponent implements OnInit {
   public userForm: FormGroup;
+
+  public availableRoles = AVAILABLE_ROLES;
 
   constructor(
     private readonly fb: FormBuilder,

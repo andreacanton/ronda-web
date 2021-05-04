@@ -51,8 +51,8 @@
       <mat-form-field>
         <mat-label>Ruolo</mat-label>
         <mat-select formControlName="role">
-          <mat-option value="member">Volontari&#601;</mat-option>
-          <mat-option value="admin">Amministratore</mat-option>
+          <mat-option value="member">{{ availableRoles.member }}</mat-option>
+          <mat-option value="admin">{{ availableRoles.admin }}</mat-option>
         </mat-select>
       </mat-form-field>
     </mat-card-content>

@@ -1,0 +1,58 @@
+<div class="listing-wrapper">
+  <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+    <mat-spinner></mat-spinner>
+  </div>
+  <table
+    mat-table
+    matSort
+    [class.loading]="dataSource.loading$ | async"
+    [dataSource]="dataSource"
+    (matSortChange)="dataSource.sortBy($event)"
+    [matSortActive]="initialSort.active"
+    [matSortDirection]="initialSort.direction"
+  >
+    <ng-container matColumnDef="memberNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>N. Socio</th>
+      <td mat-cell *matCellDef="let row">{{ row.memberNumber }}</td>
+    </ng-container>
+    <ng-container matColumnDef="lastname">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.firstname }} {{ row.lastname }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <td mat-cell *matCellDef="let row">{{ row.email }}</td>
+    </ng-container>
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ruolo</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="row.role === 'admin'">Amministratore</ng-container>
+        <ng-container *ngIf="row.role === 'member'">
+          Volontari&#601;
+        </ng-container>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Statuo</th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="row.status === 'enabled'">Abilitato</ng-container>
+        <ng-container *ngIf="row.status === 'disabled'"
+          >Disabiltato</ng-container
+        >
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator
+    *ngIf="dataSource.page$ | async as page"
+    [length]="page.pagination.rowCount"
+    [pageSize]="page.pagination.pageSize"
+    [pageIndex]="page.pagination.page - 1"
+    [hidePageSize]="true"
+    (page)="dataSource.fetch($event.pageIndex)"
+  >
+  </mat-paginator>
+</div>

@@ -20,25 +20,16 @@ import { UsersService } from 'src/app/data/services/users.service';
 })
 export class UsersComponent implements OnInit, OnDestroy {
   public dataSource: PaginatedDataSource<User, UsersQuery>;
-  public loadingSubscription: Subscription;
 
   public initialSort: Sort = {
     active: 'memberNumber',
     direction: 'asc',
   };
-
   constructor(
     private readonly userService: UsersService,
     private readonly changeDetection: ChangeDetectorRef
   ) {}
 
-  public displayedColumns = [
-    'memberNumber',
-    'lastname',
-    'email',
-    'role',
-    'status',
-  ];
   ngOnInit(): void {
     this.dataSource = new PaginatedDataSource<User, UsersQuery>(
       this.userService,
@@ -46,11 +37,6 @@ export class UsersComponent implements OnInit, OnDestroy {
       {},
       10
     );
-    this.loadingSubscription = this.dataSource.loading$.subscribe((loading) => {
-      this.changeDetection.markForCheck();
-    });
   }
-  ngOnDestroy(): void {
-    this.loadingSubscription.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 }

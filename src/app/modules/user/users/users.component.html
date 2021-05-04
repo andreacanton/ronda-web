@@ -13,7 +13,9 @@
     ></app-users-filters>
   </mat-toolbar-row>
 </mat-toolbar>
+<app-users-list class="list-listing" [dataSource]="dataSource"></app-users-list>
 <app-users-table
+  class="table-listing"
   [dataSource]="dataSource"
   [initialSort]="initialSort"
 ></app-users-table>

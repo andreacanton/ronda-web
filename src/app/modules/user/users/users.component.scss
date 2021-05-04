@@ -1,3 +1,17 @@
+@import "../../../../functions";
+
 .user-filters {
   font-size: 0.7em;
+}
+.table-listing {
+  display: none;
+}
+
+@include breakpoint(phablet) {
+  .table-listing {
+    display: block;
+  }
+  .list-listing {
+    display: none;
+  }
 }

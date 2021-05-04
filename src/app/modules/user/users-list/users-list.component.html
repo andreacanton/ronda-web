@@ -1,0 +1,17 @@
+<mat-list>
+  <cdk-virtual-scroll-viewport itemSize="72" class="user-list-viewport">
+    <mat-list-item
+      *cdkVirtualFor="let user of dataSource"
+      class="user-item"
+      matRipple
+    >
+      <h3 matLine>
+        #{{ user.memberNumber }} {{ user.firstname }} {{ user.lastname }}
+      </h3>
+      <p matLine>
+        {{ availableRoles[user.role] }} - {{ availableStatuses[user.status] }}
+      </p>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </cdk-virtual-scroll-viewport>
+</mat-list>

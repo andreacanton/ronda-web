@@ -7,6 +7,7 @@ import { UsersComponent } from './users/users.component';
 import { UsersFiltersComponent } from './users-filters/users-filters.component';
 import { UsersFiltersSheetComponent } from './users-filters-sheet/users-filters-sheet.component';
 import { UsersTableComponent } from './users-table/users-table.component';
+import { UsersListComponent } from './users-list/users-list.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { UsersTableComponent } from './users-table/users-table.component';
     UsersFiltersComponent,
     UsersFiltersSheetComponent,
     UsersTableComponent,
+    UsersListComponent,
   ],
   imports: [CommonModule, SharedModule, UserRoutingModule],
 })

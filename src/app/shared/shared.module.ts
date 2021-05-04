@@ -20,7 +20,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AfterValueChangedDirective } from './directive/after-value-changed.directive';
+
 const materialModules = [
   MatCommonModule,
   MatToolbarModule,
@@ -41,6 +43,7 @@ const materialModules = [
   MatSortModule,
   MatPaginatorModule,
   MatBottomSheetModule,
+  ScrollingModule,
 ];
 const commonModules = [ReactiveFormsModule];
 

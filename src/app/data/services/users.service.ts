@@ -1,16 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { ApiClient } from '@core/services/api.client';
 import { EMPTY, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { UsersQuery } from '../interfaces/users.query';
 import { Page, PageRequest, PaginatedService } from '../interfaces/page';
 import { User } from '../schema/user';
+import { ENVIRONMENT } from '@env/environment.token';
+import { EnvironmentInterface } from '@env/environment.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService implements PaginatedService<User, UsersQuery> {
-  constructor(private readonly apiClient: ApiClient) {}
+  constructor(
+    private readonly apiClient: ApiClient,
+    @Inject(ENVIRONMENT) private readonly appConfig: EnvironmentInterface
+  ) {}
 
   public fetch(
     query: UsersQuery,
@@ -40,7 +45,10 @@ export class UsersService implements PaginatedService<User, UsersQuery> {
     });
   }
   public saveUser(data: Partial<User>): Observable<User> {
-    return this.apiClient.post<User>('users', data);
+    return this.apiClient.post<User>(
+      `users?resetUrl=${this.appConfig.publicUrl}auth/reset`,
+      data
+    );
   }
 
   public isFieldTaken(
